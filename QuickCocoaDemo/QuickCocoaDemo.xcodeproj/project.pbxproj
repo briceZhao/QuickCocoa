@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043134C321006EC800B90E6E /* QUCustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043134C221006EC800B90E6E /* QUCustomAlertView.m */; };
 		0461427220FDD0C300389F90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0461427120FDD0C300389F90 /* AppDelegate.m */; };
 		0461427520FDD0C300389F90 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0461427420FDD0C300389F90 /* ViewController.m */; };
 		0461427820FDD0C300389F90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0461427620FDD0C300389F90 /* Main.storyboard */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		043134C121006EC800B90E6E /* QUCustomAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QUCustomAlertView.h; sourceTree = "<group>"; };
+		043134C221006EC800B90E6E /* QUCustomAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QUCustomAlertView.m; sourceTree = "<group>"; };
 		0461426D20FDD0C300389F90 /* QuickCocoaDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickCocoaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0461427020FDD0C300389F90 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0461427120FDD0C300389F90 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 				0461428C20FDD0F500389F90 /* QUPageScrollView.m */,
 				0461428E20FDD0F600389F90 /* QUPageTitleView.h */,
 				0461428720FDD0F500389F90 /* QUPageTitleView.m */,
+				043134C121006EC800B90E6E /* QUCustomAlertView.h */,
+				043134C221006EC800B90E6E /* QUCustomAlertView.m */,
 			);
 			path = QuickCocoa;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 			files = (
 				0461428F20FDD0F600389F90 /* QUPageTitleView.m in Sources */,
 				0461429220FDD0F600389F90 /* QUPageContentView.m in Sources */,
+				043134C321006EC800B90E6E /* QUCustomAlertView.m in Sources */,
 				0461427520FDD0C300389F90 /* ViewController.m in Sources */,
 				0461428020FDD0C400389F90 /* main.m in Sources */,
 				0461427220FDD0C300389F90 /* AppDelegate.m in Sources */,

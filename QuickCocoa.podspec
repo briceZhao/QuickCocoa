@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
   
   s.name         = "QuickCocoa"
-  s.version      = "1.0"
+  s.version      = "1.0.1"
   s.platform     = :ios, '8.0'
   s.summary      = "Objective-C library."
   s.description  = <<-DESC
