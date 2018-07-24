@@ -19,6 +19,7 @@
 		0461429020FDD0F600389F90 /* QUPageScrollStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0461428920FDD0F500389F90 /* QUPageScrollStyle.m */; };
 		0461429120FDD0F600389F90 /* QUPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0461428C20FDD0F500389F90 /* QUPageScrollView.m */; };
 		0461429220FDD0F600389F90 /* QUPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0461428D20FDD0F500389F90 /* QUPageContentView.m */; };
+		6525B00B21075457006EB436 /* QULayoutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6525B00A21075457006EB436 /* QULayoutButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		0461428C20FDD0F500389F90 /* QUPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QUPageScrollView.m; sourceTree = "<group>"; };
 		0461428D20FDD0F500389F90 /* QUPageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QUPageContentView.m; sourceTree = "<group>"; };
 		0461428E20FDD0F600389F90 /* QUPageTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QUPageTitleView.h; sourceTree = "<group>"; };
+		6525B00921075457006EB436 /* QULayoutButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QULayoutButton.h; sourceTree = "<group>"; };
+		6525B00A21075457006EB436 /* QULayoutButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QULayoutButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				043134C221006EC800B90E6E /* QUCustomAlertView.m */,
 				043134C421007C4600B90E6E /* QUCustomNotifyHUD.h */,
 				043134C521007C4600B90E6E /* QUCustomNotifyHUD.m */,
+				6525B00921075457006EB436 /* QULayoutButton.h */,
+				6525B00A21075457006EB436 /* QULayoutButton.m */,
 			);
 			path = QuickCocoa;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 				043134C321006EC800B90E6E /* QUCustomAlertView.m in Sources */,
 				0461427520FDD0C300389F90 /* ViewController.m in Sources */,
 				0461428020FDD0C400389F90 /* main.m in Sources */,
+				6525B00B21075457006EB436 /* QULayoutButton.m in Sources */,
 				0461427220FDD0C300389F90 /* AppDelegate.m in Sources */,
 				043134C621007C4600B90E6E /* QUCustomNotifyHUD.m in Sources */,
 				0461429120FDD0F600389F90 /* QUPageScrollView.m in Sources */,
