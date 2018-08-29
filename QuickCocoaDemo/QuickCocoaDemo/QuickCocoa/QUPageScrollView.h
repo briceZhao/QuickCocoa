@@ -19,4 +19,6 @@
 
 + (instancetype)pageViewWithFrame:(CGRect)frame titles:(NSArray *)titles childVCs:(NSArray *)childVCs style:(QUPageScrollStyle *)style;
 
+- (void)setCurrentIndex:(NSInteger)index;
+
 @end

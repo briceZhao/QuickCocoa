@@ -15,18 +15,31 @@
 
 @implementation QUPageContentView
 
-- (instancetype)initWithFrame:(CGRect)frame childVCs:(NSArray *)childVCs {
+- (instancetype)initWithFrame:(CGRect)frame childVCs:(NSArray *)childVCs style:(QUPageScrollStyle *)style {
     self = [super initWithFrame:frame];
     if (self) {
         self.childVCs = childVCs;
+        self.style = style;
         [self setupUI];
     }
     return self;
 }
 
+- (void)setCurrentIndex:(NSInteger)currentIndex {
+    if (currentIndex>=0 && currentIndex<=self.childVCs.count-1)
+    {
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:currentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+        _style.selectIndex = _currentIndex = currentIndex;
+    }
+}
+
 - (void)setupUI {
     
     [self addSubview: self.collectionView];
+    if (self.style.selectIndex>=0 && self.style.selectIndex<=self.childVCs.count-1)
+    {
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.style.selectIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    }
 }
 
 - (UICollectionView *)collectionView {

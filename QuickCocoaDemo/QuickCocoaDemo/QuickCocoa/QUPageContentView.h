@@ -19,13 +19,17 @@ static NSString *kPageContentViewCellId = @"kPageContentViewCellId";
 
 @property (nonatomic, weak) UIViewController *parentVC;
 
+@property (nonatomic, assign) CGFloat fromOffsetX;
+
 @property (nonatomic, strong) UICollectionView *collectionView;
 
-@property (nonatomic, assign) CGFloat fromOffsetX;
+@property (nonatomic, assign) QUPageScrollStyle *style;
+
+@property (nonatomic, assign) NSInteger currentIndex;
 
 @property (nonatomic, assign) BOOL isTitleClickForbidSVDelegate;
 
-- (instancetype)initWithFrame:(CGRect)frame childVCs:(NSArray *)childVCs;
+- (instancetype)initWithFrame:(CGRect)frame childVCs:(NSArray *)childVCs style:(QUPageScrollStyle *)style;
 
 
 @end

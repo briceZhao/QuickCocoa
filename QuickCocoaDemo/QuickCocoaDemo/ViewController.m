@@ -13,7 +13,8 @@
 #import "QUPageScrollView.h"
 
 @interface ViewController ()
-
+@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, weak) QUPageScrollView *pageView;
 @end
 
 @implementation ViewController
@@ -26,6 +27,7 @@
     QUPageScrollStyle *style = [QUPageScrollStyle style];
     style.isNeedTitleScale = NO;
     style.isScrollEnable = YES;
+    style.selectIndex = 3;
     
     NSMutableArray *childVCs = [NSMutableArray arrayWithCapacity:titles.count];
     for (NSString *title in titles) {
@@ -35,6 +37,7 @@
         [childVCs addObject:vc];
     }
     QUPageScrollView *pageView = [QUPageScrollView pageViewWithFrame:CGRectMake(0, 200, kScreenWidth, 300) titles:titles childVCs:childVCs style:style];
+    self.pageView = pageView;
     [self.view addSubview:pageView];
 }
 
@@ -44,6 +47,11 @@
     CGFloat g = arc4random_uniform(256) / 255.0;
     CGFloat b = arc4random_uniform(256) / 255.0;
     return [UIColor colorWithRed:r green:g blue:b alpha:1.0];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    NSInteger random = arc4random_uniform(8);
+    [self.pageView setCurrentIndex: random];
 }
 
 - (void)didReceiveMemoryWarning {

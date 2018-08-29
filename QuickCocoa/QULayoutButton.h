@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum {
+typedef enum : NSUInteger {
     /**水平布局, 和原始UIButton一样, 图片在左边, 标题文字在右边
      */
-    QULayoutButtonStyleHorizontal,
+    QULayoutButtonStyleHorizontal = 0,
     /**水平反向布局, 标题文字在左边, 图片在右边
      */
     QULayoutButtonStyleHorizontalReverse,

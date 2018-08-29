@@ -56,6 +56,7 @@ ColorRGB ColorRGBMake(CGFloat red, CGFloat green, CGFloat blue) {
 }
 
 - (void)setupUI {
+    _currentIndex = self.style.selectIndex;
     [self addSubview: self.scrollView];
     [self setupLabels];
     [self setupBottomLine];
@@ -87,7 +88,7 @@ ColorRGB ColorRGBMake(CGFloat red, CGFloat green, CGFloat blue) {
         titleLabel.text = title;
         titleLabel.tag = index;
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = index==0 ? strongSelf.style.titleSelColor : strongSelf.style.titleNorColor;
+        titleLabel.textColor = index==self.style.selectIndex ? strongSelf.style.titleSelColor : strongSelf.style.titleNorColor;
         titleLabel.font = strongSelf.style.titleFont;
         [strongSelf.scrollView addSubview:titleLabel];
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(titleLabelClick:)];
@@ -124,9 +125,10 @@ ColorRGB ColorRGBMake(CGFloat red, CGFloat green, CGFloat blue) {
 - (void)setupBottomLine {
     if (self.style.isShowBottomLine) {
         [self.scrollView addSubview:self.bottomLine];
-        self.bottomLine.frame = self.titleLabels.firstObject.frame;
+        self.bottomLine.frame = self.titleLabels[self.style.selectIndex].frame;
     }
-    self.bottomLine.frame = CGRectMake(self.bottomLine.frame.origin.x, self.style.titleViewHeight - self.style.bottomLineHeight - self.style.bottomLineMargin, self.bottomLine.frame.size.width, self.style.bottomLineHeight);
+    CGRect bottomFrame = self.bottomLine.frame;
+    self.bottomLine.frame = CGRectMake(bottomFrame.origin.x + self.style.bottomLineExtendWidth, bottomFrame.origin.y + bottomFrame.size.height - self.style.bottomLineMargin, bottomFrame.size.width - 2 * self.style.bottomLineExtendWidth, self.style.bottomLineHeight);
 }
 
 
@@ -138,7 +140,7 @@ ColorRGB ColorRGBMake(CGFloat red, CGFloat green, CGFloat blue) {
     UILabel *sourceLabel = self.titleLabels[self.currentIndex];
     sourceLabel.textColor = self.style.titleNorColor;
     targetLabel.textColor = self.style.titleSelColor;
-    self.currentIndex = targetLabel.tag;
+    _currentIndex = targetLabel.tag;
     
     [self adjustLabelPos];
     
@@ -155,18 +157,42 @@ ColorRGB ColorRGBMake(CGFloat red, CGFloat green, CGFloat blue) {
         CGRect bottomFrame = self.bottomLine.frame;
         [UIView animateWithDuration:0.3 animations:^{
             if (self.style.isScrollEnable) {
-                self.bottomLine.frame = CGRectMake(targetLabel.frame.origin.x +  self.style.bottomLineExtendWidth, bottomFrame.origin.y, targetLabel.frame.size.width - 2 * self.style.bottomLineExtendWidth, bottomFrame.size.height);
-            } else {
                 self.bottomLine.frame = CGRectMake(targetLabel.frame.origin.x - self.style.bottomLineExtendWidth, bottomFrame.origin.y, targetLabel.frame.size.width + 2 * self.style.bottomLineExtendWidth, bottomFrame.size.height);
+            } else {
+                self.bottomLine.frame = CGRectMake(targetLabel.frame.origin.x + self.style.bottomLineExtendWidth, bottomFrame.origin.y, targetLabel.frame.size.width - 2 * self.style.bottomLineExtendWidth, bottomFrame.size.height);
             }
         }];
     }
 }
 
 - (void)pageContentView:(QUPageContentView *)contentView didEndScrollToIndex:(NSInteger)index {
-    self.currentIndex = index;
+    _currentIndex = index;
     [self adjustLabelPos];
 }
+
+
+- (void)setCurrentIndex:(NSInteger)currentIndex {
+    if (currentIndex>=0 && currentIndex<=self.titleLabels.count-1)
+    {
+        UILabel *sourceLabel = self.titleLabels[_currentIndex];
+        UILabel *targetLabel = self.titleLabels[currentIndex];
+        sourceLabel.textColor = [UIColor colorWithRed:_norRGB.red green:_norRGB.green blue:_norRGB.blue alpha:1.0];
+        targetLabel.textColor = [UIColor colorWithRed:_selRGB.red green:_selRGB.green blue:_selRGB.blue alpha:1.0];
+        if (self.style.isShowBottomLine) {
+            CGFloat deltaWidth = targetLabel.frame.size.width - sourceLabel.frame.size.width;
+            CGFloat deltaX = targetLabel.frame.origin.x - sourceLabel.frame.origin.x;
+            CGRect bottomFrame = self.bottomLine.frame;
+            if (self.style.isScrollEnable) {
+                self.bottomLine.frame = CGRectMake(sourceLabel.frame.origin.x - deltaX +  self.style.bottomLineExtendWidth, bottomFrame.origin.y, sourceLabel.frame.size.width + deltaWidth + 2 * self.style.bottomLineExtendWidth, bottomFrame.size.height);
+            } else {
+                self.bottomLine.frame = CGRectMake(sourceLabel.frame.origin.x + deltaX + self.style.bottomLineExtendWidth, bottomFrame.origin.y, sourceLabel.frame.size.width + deltaWidth - 2 * self.style.bottomLineExtendWidth, bottomFrame.size.height);
+            }
+        }
+        _style.selectIndex = _currentIndex = currentIndex;
+        [self adjustLabelPos];
+    }
+}
+
 
 - (void)pageContentView:(QUPageContentView *)contentView sourceIndex:(NSInteger)sourceIndex targetIndex:(NSInteger)targetIndex progress:(CGFloat)progress {
     UILabel *sourceLabel = self.titleLabels[sourceIndex];
@@ -188,7 +214,7 @@ ColorRGB ColorRGBMake(CGFloat red, CGFloat green, CGFloat blue) {
         if (self.style.isScrollEnable) {
             self.bottomLine.frame = CGRectMake(sourceLabel.frame.origin.x + deltaX * progress +  self.style.bottomLineExtendWidth, bottomFrame.origin.y, sourceLabel.frame.size.width + deltaWidth * progress - 2 * self.style.bottomLineExtendWidth, bottomFrame.size.height);
         } else {
-            self.bottomLine.frame = CGRectMake(sourceLabel.frame.origin.x + deltaX * progress - self.style.bottomLineExtendWidth, bottomFrame.origin.y, sourceLabel.frame.size.width + deltaWidth * progress + 2 * self.style.bottomLineExtendWidth, bottomFrame.size.height);
+            self.bottomLine.frame = CGRectMake(sourceLabel.frame.origin.x + deltaX * progress + self.style.bottomLineExtendWidth, bottomFrame.origin.y, sourceLabel.frame.size.width + deltaWidth * progress - 2 * self.style.bottomLineExtendWidth, bottomFrame.size.height);
         }
     }
 }
@@ -200,10 +226,14 @@ ColorRGB ColorRGBMake(CGFloat red, CGFloat green, CGFloat blue) {
         offset = 0;
     }
     CGFloat maxOffset = self.scrollView.contentSize.width - self.scrollView.bounds.size.width;
-    if (offset > maxOffset) {
+    if (offset > maxOffset)
+    {
         offset = maxOffset;
     }
-    [self.scrollView setContentOffset:CGPointMake(offset, 0) animated:YES];
+    if (self.style.isScrollEnable)
+    {
+        [self.scrollView setContentOffset:CGPointMake(offset, 0) animated:YES];
+    }
 }
 
 - (void)dealloc {

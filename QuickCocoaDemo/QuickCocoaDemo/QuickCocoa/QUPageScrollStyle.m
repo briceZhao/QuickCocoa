@@ -12,6 +12,7 @@
 
 + (instancetype)style {
     QUPageScrollStyle *pv = [[self alloc]init];
+    pv.selectIndex = 0;
     pv.titleViewHeight = 50.f;
     pv.titleFont = [UIFont systemFontOfSize:16.f];
     pv.isNeedTitleScale = NO;
@@ -21,7 +22,7 @@
     pv.titleSelColor = [UIColor colorWithRed:80.0/255.0 green:140.0/255.0 blue:238.0/255.0 alpha:1.0];
     pv.isShowBottomLine = YES;
     pv.bottomLineColor = [UIColor colorWithRed:80.0/255.0 green:140.0/255.0 blue:238.0/255.0 alpha:1.0];
-    pv.bottomLineExtendWidth = 0.f;
+    pv.bottomLineExtendWidth = 18.f;
     pv.bottomLineHeight = 2.f;
     pv.bottomLineMargin = 5.f;
     pv.scaleRatio = 1.2;

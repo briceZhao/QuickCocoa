@@ -26,6 +26,8 @@
 
 @interface QUPageScrollStyle : NSObject
 
+@property (nonatomic, assign) NSInteger selectIndex;  //导航默认停在第几个: 默认 0
+
 @property (nonatomic, assign) CGFloat titleViewHeight; //导航条的高度，一般不用修改: 默认 50
 
 @property (nonatomic, strong) UIFont *titleFont; //导航条上的字体大小: 默认 16
