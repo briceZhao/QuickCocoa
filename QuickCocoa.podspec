@@ -2,8 +2,8 @@
 Pod::Spec.new do |s|
   
   s.name         = "QuickCocoa"
-  s.version      = "1.0.2"
-  s.platform     = :ios, '8.0'
+  s.version      = "1.0.3"
+  s.platform     = :ios, '9.0'
   s.summary      = "Objective-C library."
   s.description  = <<-DESC
 		A convenient tire to do UI jobs.
